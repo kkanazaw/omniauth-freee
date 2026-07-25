@@ -15,7 +15,8 @@ jobs:
     name: Push gem to RubyGems.org
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      # GitHub Release の作成に必要
+      contents: write
       # RubyGems.org の Trusted Publishing（OIDC）に必要。
       # これがないと OIDC トークンを取得できない。
       id-token: write
@@ -54,3 +55,20 @@ jobs:
 
       - name: Push gem
         run: gem push omniauth-freee-*.gem
+
+      # タグと Releases ページがずれないように、対応する GitHub Release も作る。
+      # gem の公開に成功した後に実行し、失敗時に Release だけ残らないようにする。
+      # 既に Release がある場合（手動作成後の再実行など）はスキップする。
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            echo "release ${GITHUB_REF_NAME} already exists; skipping"
+            exit 0
+          fi
+          gh release create "${GITHUB_REF_NAME}" \
+            --verify-tag \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes
