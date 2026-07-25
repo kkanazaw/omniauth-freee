@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+# 既定の権限を読み取りのみに絞る
+permissions:
+  contents: read
+
+concurrency:
+  # 同じ ref に新しい push があれば古い実行を打ち切る
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  spec:
+    name: RSpec (Ruby ${{ matrix.ruby }})
+    runs-on: ubuntu-latest
+    strategy:
+      # 1 バージョンが落ちても他の結果を知りたいので中断しない
+      fail-fast: false
+      matrix:
+        ruby: ['3.2', '3.3', '3.4', '4.0']
+    env:
+      # guard 系はローカル開発専用なので CI では入れない（Gemfile 参照）
+      BUNDLE_WITHOUT: guard
+    steps:
+      # サプライチェーン対策のため commit SHA で固定する（更新は Renovate に任せる）
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - run: bundle exec rspec

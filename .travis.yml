@@ -1,7 +1,0 @@
-language: ruby
-deploy:
-  provider: rubygems
-  api_key:
-    secure: KRmedrg9+bmTZ3jboI1AcoGqZTJSIYP9A8H+OABOrmk2zh6WywiJKUZcpIXfltrn+Caw/LiYknN++5KSZbLRqQyKSwAiDyeTzS3mgOFV2KoHZW734vhXqhk4Q6S+n799hEtlgmE3ceXQ4fgLkM+FuauurEJuFDYnNm+2b+LteCSxmm71gLqYfSEXy4X4tnhRJEq6z3hpCc9jIq/4JMs62mjh7akvXv4EQHauq7rhjKrDLbAFX4ROgwOvcheBMn5LsSIcSvBjQNPTq6fP1X1++l7Xt/0jCu9x4QADvbdRYD/exK227dPCPZUBn0VuDT6WeNhjAsp9GufmOR3/e3e6ceEe2rA8dM0+5hSCt3n7RKW3IvYgvJQ+XLskvXyD2X8xzumkjJVNTUzHN97uotxfrYyEUpxO0NRHswqg2JphCc+p4Pqdyx5XLYVXsvF0i0N4xXYxx/mVckWEjFlZezYsLoDVos+CcP1AbP2LZgwYyw+T+u+ukYO2TAA+jA516YxssRh4rs4cbamJOOGxDkMniQPFgwgBp+Aro9fWdKqJyglt57+ptDnlzamUYXYgGeAnN5q995rfZ+4aNoyajwHEsCYPLIewDlfv4609zqnZCMkc8laHXbrsYVgN5uPf7VVuNEwSLBQST9mLDggEosBTSMcQp+Mpv+7jA6vzrG3bwuU=
-  on:
-    tags: true
