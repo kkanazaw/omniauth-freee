@@ -1,5 +1,7 @@
 # OmniAuth Freee
 
+[![CI](https://github.com/kkanazaw/omniauth-freee/actions/workflows/ci.yml/badge.svg)](https://github.com/kkanazaw/omniauth-freee/actions/workflows/ci.yml)
+
 This is the *unofficial* OmniAuth strategy for authenticating to Freee. To
 use it, you'll need to sign up for an OAuth2 Application ID and Secret
 on the [Freee Applications Page](https://secure.freee.co.jp/oauth/applications).
